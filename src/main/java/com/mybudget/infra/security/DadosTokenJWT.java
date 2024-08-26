@@ -1,4 +1,4 @@
-package com.mybudget.infra.secutiry;
+package com.mybudget.infra.security;
 
 public record DadosTokenJWT(String token) {
 }

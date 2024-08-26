@@ -1,6 +1,6 @@
 package com.mybudget.domain.dto;
 
-import com.mybudget.domain.model.Status;
+import com.mybudget.domain.expense.Status;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

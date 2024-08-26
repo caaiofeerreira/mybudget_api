@@ -1,4 +1,4 @@
-package com.mybudget.domain.model;
+package com.mybudget.domain.expense;
 
 public enum Status {
 

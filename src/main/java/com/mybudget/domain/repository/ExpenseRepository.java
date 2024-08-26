@@ -1,7 +1,7 @@
 package com.mybudget.domain.repository;
 
-import com.mybudget.domain.model.Expense;
-import com.mybudget.domain.model.Status;
+import com.mybudget.domain.expense.Expense;
+import com.mybudget.domain.expense.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

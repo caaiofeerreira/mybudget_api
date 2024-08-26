@@ -1,4 +1,4 @@
-package com.mybudget.infra.secutiry;
+package com.mybudget.infra.security;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;

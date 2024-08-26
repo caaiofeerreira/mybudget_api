@@ -1,4 +1,4 @@
-package com.mybudget.infra.secutiry;
+package com.mybudget.infra.security;
 
 import com.mybudget.domain.repository.UserRepository;
 import jakarta.servlet.FilterChain;

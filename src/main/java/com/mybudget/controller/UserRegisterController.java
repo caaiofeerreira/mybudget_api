@@ -1,7 +1,7 @@
 package com.mybudget.controller;
 
 import com.mybudget.domain.dto.UserDto;
-import com.mybudget.domain.service.UserRegister;
+import com.mybudget.domain.service.UserRegisterService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserRegisterController {
 
     @Autowired
-    private UserRegister register;
+    private UserRegisterService register;
 
     @PostMapping("/user-register")
     public ResponseEntity<UserDto> registerUser(@RequestBody @Valid UserDto userDto) {

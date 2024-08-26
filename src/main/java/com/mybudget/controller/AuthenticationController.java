@@ -1,10 +1,10 @@
 package com.mybudget.controller;
 
-import com.mybudget.domain.model.User;
-import com.mybudget.domain.model.UserAuthentication;
+import com.mybudget.domain.user.User;
+import com.mybudget.domain.user.UserAuthentication;
 import com.mybudget.infra.exception.InvalidCredentialsException;
-import com.mybudget.infra.secutiry.DadosTokenJWT;
-import com.mybudget.infra.secutiry.TokenService;
+import com.mybudget.infra.security.DadosTokenJWT;
+import com.mybudget.infra.security.TokenService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

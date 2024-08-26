@@ -1,6 +1,6 @@
 package com.mybudget.domain.dto;
 
-import com.mybudget.domain.model.User;
+import com.mybudget.domain.user.User;
 
 public record UserDto(Long id,
                       String name,
@@ -10,7 +10,7 @@ public record UserDto(Long id,
     public UserDto(User user) {
         this(user.getId(),
                 user.getName(),
-                user.getName(),
+                user.getEmail(),
                 user.getPassword());
     }
 }

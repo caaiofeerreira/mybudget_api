@@ -2,11 +2,43 @@
 
 <img src = "Logo - MyBudget.png" alt="Logo MyBudget">
 
+
 ## Descrição
 
 A API MyBudget é projetada para gerenciar usuários e despesas. A seguir, você encontrará a documentação detalhada para os endpoints disponíveis, incluindo exemplos de solicitações e respostas.
 
 ---
+
+## Tecnologias e Bibliotecas Utilizadas
+
+### Frameworks e Ferramentas
+
+- **Spring Boot**: Plataforma para simplificar o desenvolvimento de aplicações Java.
+  - `spring-boot-starter-web`: Facilita a criação de aplicações web e APIs RESTful, incluindo suporte para Tomcat, Jackson e outras bibliotecas essenciais.
+  - `spring-boot-starter-data-jpa`: Integra JPA (Java Persistence API) para manipulação de dados com Hibernate ou outras implementações JPA.
+  - `spring-boot-starter-security`: Adiciona funcionalidades de segurança para autenticação e autorização.
+  - `spring-boot-starter-validation`: Suporte para validação de dados usando a especificação Bean Validation (JSR 380).
+
+### Banco de Dados
+
+- **MySQL**: Sistema de gerenciamento de banco de dados relacional.
+  - `mysql-connector-j`: Conector JDBC para interagir com bancos de dados MySQL.
+
+### Programação e Ferramentas
+
+- **Lombok**: Reduz o boilerplate de código Java, gerando automaticamente métodos comuns como getters e setters.
+
+### Segurança
+
+- **JWT (JSON Web Token)**: Utilizado para criar e validar tokens de autenticação.
+  - `java-jwt`: Biblioteca da Auth0 para manipulação de JWTs.
+
+### Documentação da API
+
+- **OpenAPI (Swagger)**: Para geração de documentação interativa da API.
+  - `springdoc-openapi-starter-webmvc-ui`: Gera documentação OpenAPI (Swagger) para a API, facilitando a visualização e interação.
+
+___
 
 ## Endpoints
 
@@ -39,7 +71,7 @@ ___
 ```json
 {
   "email": "email@example.com",
-  "password": "senha"
+  "password": "password"
 }
 ```
 ___

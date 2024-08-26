@@ -1,8 +1,7 @@
-package com.mybudget.domain.model;
+package com.mybudget.domain.expense;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.mybudget.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 

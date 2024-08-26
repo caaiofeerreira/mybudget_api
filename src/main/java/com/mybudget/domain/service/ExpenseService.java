@@ -2,15 +2,17 @@ package com.mybudget.domain.service;
 
 import com.mybudget.domain.dto.ExpenseDto;
 import com.mybudget.domain.dto.UpdateExpenseDto;
-import com.mybudget.domain.model.Expense;
-import com.mybudget.domain.model.Status;
-import com.mybudget.domain.model.User;
+import com.mybudget.domain.expense.Expense;
+import com.mybudget.domain.expense.Status;
+import com.mybudget.domain.user.User;
 import com.mybudget.domain.repository.ExpenseRepository;
 import com.mybudget.domain.repository.UserRepository;
+import com.mybudget.domain.service.validation.ValidateDeleteExpense;
+import com.mybudget.domain.service.validation.ValidateNewExpense;
 import com.mybudget.infra.exception.ExpenseNotFoundException;
 import com.mybudget.infra.exception.ExpenseProcessingException;
 import com.mybudget.infra.exception.UnauthorizedAccessException;
-import com.mybudget.infra.secutiry.TokenService;
+import com.mybudget.infra.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +32,12 @@ public class ExpenseService {
     private UserRepository userRepository;
 
     @Autowired
+    private ValidateNewExpense validateNewExpense;
+
+    @Autowired
+    private ValidateDeleteExpense validateDeleteExpense;
+
+    @Autowired
     private TokenService tokenService;
 
     @Transactional
@@ -38,6 +46,8 @@ public class ExpenseService {
         try {
 
             User user = tokenService.getUserFromToken(token);
+
+            validateNewExpense.validate(expenseDto);
 
             Expense newExpense = new Expense();
             newExpense.setUser(user);
@@ -50,8 +60,10 @@ public class ExpenseService {
 
             return new ExpenseDto(newExpense);
 
+        } catch (ExpenseProcessingException e) {
+            throw e;
         } catch (Exception e) {
-            throw new ExpenseProcessingException("Erro ao processar a despesa.");
+            throw new RuntimeException("Erro ao processar despesa. ", e);
         }
     }
 
@@ -86,7 +98,9 @@ public class ExpenseService {
             return new ExpenseDto(expense);
 
         } catch (UnauthorizedAccessException e) {
-            throw new ExpenseProcessingException("Erro ao atualizar despesa. "+ e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            throw new ExpenseProcessingException("Erro ao atualizar despesa. " + e.getMessage());
         }
     }
 
@@ -100,20 +114,14 @@ public class ExpenseService {
             Expense expense = expenseRepository.findById(expenseId)
                     .orElseThrow(() -> new ExpenseNotFoundException("Despesa não encontrada"));
 
-            if (expense.getStatus() == Status.PENDING) {
-                throw new UnauthorizedAccessException("Você não pode deletar uma despesa que se encontra PENDENTE.");
-            }
-
-            if (!expense.getUser().equals(user)) {
-                throw new UnauthorizedAccessException("Você não tem permissão para atualizar esta despesa.");
-            }
+            validateDeleteExpense.validate(expense, user);
 
             expenseRepository.delete(expense);
 
-        } catch(UnauthorizedAccessException e) {
-            throw new ExpenseProcessingException("Erro ao deletar despesa: " + e.getMessage());
-        } catch(Exception e) {
-            throw new RuntimeException(e);
+        } catch (UnauthorizedAccessException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ExpenseProcessingException("Erro ao deletar despesa. "+ e.getMessage());
         }
     }
 
@@ -133,8 +141,10 @@ public class ExpenseService {
 
             return expenseList.stream().map(ExpenseDto::new).toList();
 
-        } catch(Exception e) {
-            throw new ExpenseNotFoundException(e.getMessage());
+        } catch (ExpenseNotFoundException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ExpenseProcessingException("Erro ao listar despesa. "+ e.getMessage());
         }
     }
 
@@ -154,8 +164,10 @@ public class ExpenseService {
 
             return expensesPending.stream().map(ExpenseDto::new).toList();
 
-        } catch(Exception e) {
-            throw new ExpenseNotFoundException(e.getMessage());
+        } catch (ExpenseNotFoundException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ExpenseProcessingException("Erro ao listar despesas pendentes. "+ e.getMessage());
         }
     }
 
@@ -175,8 +187,10 @@ public class ExpenseService {
 
             return expensesPaid.stream().map(ExpenseDto::new).toList();
 
-        } catch(Exception e) {
-            throw new ExpenseNotFoundException(e.getMessage());
+        } catch (ExpenseNotFoundException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ExpenseProcessingException("Erro ao listar despesas pagas. "+ e.getMessage());
         }
     }
 }

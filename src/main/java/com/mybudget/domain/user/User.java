@@ -1,7 +1,8 @@
-package com.mybudget.domain.model;
+package com.mybudget.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.mybudget.domain.expense.Expense;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -58,6 +59,12 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    @JsonIgnore
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @JsonIgnore

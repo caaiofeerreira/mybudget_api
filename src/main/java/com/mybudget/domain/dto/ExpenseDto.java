@@ -1,8 +1,7 @@
 package com.mybudget.domain.dto;
 
-import com.mybudget.domain.model.Expense;
-import com.mybudget.domain.model.Status;
-import com.mybudget.domain.model.User;
+import com.mybudget.domain.expense.Expense;
+import com.mybudget.domain.expense.Status;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
