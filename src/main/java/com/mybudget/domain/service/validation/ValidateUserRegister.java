@@ -24,14 +24,11 @@ public class ValidateUserRegister {
 
         String email = userDto.email();
 
-        if (!validateEmail(email)) {
-           throw new UserRegisterException("O e-mail fornecido é inválido.");
-        }
+        validateEmail(email);
 
         validatePassword(userDto.password());
 
         Optional<User> existingClient = userRepository.existingEmail(userDto.email());
-
         existingClient.ifPresent(user -> {
             throw new UserRegisterException("O e-mail fornecido já está associado a uma conta existente.");
         });
@@ -44,7 +41,10 @@ public class ValidateUserRegister {
         }
 
         Matcher matcher = EMAIL_PATTERN.matcher(email);
-        return matcher.matches();
+        if (!matcher.matches()) {
+            throw new UserRegisterException("O e-mail fornecido é inválido.");
+        }
+        return true;
     }
 
     private void validatePassword(String password) {
@@ -54,8 +54,7 @@ public class ValidateUserRegister {
         }
 
         if (password.length() <= 5) {
-            throw new UserRegisterException("A senha deve ter mais de 5 dígitos.");
+            throw new UserRegisterException("A senha deve ter 6 ou mais dígitos.");
         }
     }
-
 }

@@ -97,10 +97,10 @@ public class ExpenseService {
 
             return new ExpenseDto(expense);
 
-        } catch (UnauthorizedAccessException e) {
+        } catch (ExpenseNotFoundException e) {
             throw e;
         } catch (Exception e) {
-            throw new ExpenseProcessingException("Erro ao atualizar despesa. " + e.getMessage());
+            throw new UnauthorizedAccessException("Erro ao atualizar despesa. " + e.getMessage());
         }
     }
 
@@ -118,14 +118,14 @@ public class ExpenseService {
 
             expenseRepository.delete(expense);
 
-        } catch (UnauthorizedAccessException e) {
+        } catch (ExpenseNotFoundException e) {
             throw e;
         } catch (Exception e) {
-            throw new ExpenseProcessingException("Erro ao deletar despesa. "+ e.getMessage());
+            throw new UnauthorizedAccessException("Você não tem permissão para deletar esta despesa.");
         }
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public List<ExpenseDto> getExpenses(String token) {
 
         try {
@@ -144,11 +144,11 @@ public class ExpenseService {
         } catch (ExpenseNotFoundException e) {
             throw e;
         } catch (Exception e) {
-            throw new ExpenseProcessingException("Erro ao listar despesa. "+ e.getMessage());
+            throw new RuntimeException("Erro ao listar despesa.");
         }
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public List<ExpenseDto> getExpensesPending(String token) {
 
         try {

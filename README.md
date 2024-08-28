@@ -38,6 +38,12 @@ A API MyBudget é projetada para gerenciar usuários e despesas. A seguir, você
 - **OpenAPI (Swagger)**: Para geração de documentação interativa da API.
   - `springdoc-openapi-starter-webmvc-ui`: Gera documentação OpenAPI (Swagger) para a API, facilitando a visualização e interação.
 
+### Testes
+
+- **JUnit**: Framework para realizar testes unitários e de integração em Java.
+  - `spring-boot-starter-test`: Inclui JUnit, Mockito, AssertJ e outras dependências necessárias para testes com Spring Boot.
+  - `spring-security-test`: Fornece suporte para testar a segurança da aplicação em conjunto com Spring Security.
+
 ___
 
 ## Endpoints

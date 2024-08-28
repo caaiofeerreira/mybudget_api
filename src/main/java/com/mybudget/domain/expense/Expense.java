@@ -33,7 +33,6 @@ public class Expense {
     @JoinColumn(name = "user_id")
     private User user;
 
-
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;

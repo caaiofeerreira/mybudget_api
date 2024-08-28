@@ -25,7 +25,7 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<DadosTokenJWT> efetuarLogin(@RequestBody @Valid UserAuthentication dados) {
+    public ResponseEntity<DadosTokenJWT> login(@RequestBody @Valid UserAuthentication dados) {
 
         try {
             var authenticationToken = new UsernamePasswordAuthenticationToken(dados.email(), dados.password());
