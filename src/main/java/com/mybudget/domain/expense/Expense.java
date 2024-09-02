@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Entity(name = "tb_expense")
+@Entity(name = "Expense")
 @Table(name = "tb_expense")
 @Getter
 @Setter

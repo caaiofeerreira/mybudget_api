@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Entity(name = "tb_user")
+@Entity(name = "User")
 @Table(name = "tb_user")
 @Getter @Setter
 @NoArgsConstructor

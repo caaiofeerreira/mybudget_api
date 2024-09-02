@@ -11,10 +11,10 @@ import java.util.UUID;
 
 public interface ExpenseRepository extends JpaRepository<Expense, UUID> {
 
-    @Query("SELECT e FROM tb_expense e WHERE e.user.id = :user")
+    @Query("SELECT e FROM Expense e WHERE e.user.id = :user")
     List<Expense> findByUserInvolved(@Param("user") Long user);
 
 
-    @Query("SELECT e FROM tb_expense e WHERE e.user.id = :id AND e.status = :status")
+    @Query("SELECT e FROM Expense e WHERE e.user.id = :id AND e.status = :status")
     List<Expense> findByUserInvolvedAndStatus(Long id, Status status);
 }
